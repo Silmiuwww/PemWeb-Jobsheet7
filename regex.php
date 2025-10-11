@@ -23,20 +23,23 @@
         $text = isset($_POST['text']) ? $_POST['text'] : '';
         $text = htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
 
-        $hurufKecil = '/[a-z]/';
-        $hasilHurufKecil = preg_match($hurufKecil, $text) ? "Huruf kecil ditemukan." : "Tidak ada huruf kecil.";
+        $patternHurufKecil = '/[a-z]/'; 
+        $hasilHurufKecil = preg_match($patternHurufKecil, $text) ? "Huruf kecil ditemukan!" : "Tidak ada huruf kecil!";
 
-        $angka = '/[0-9]+/';
-        $hasilAngka = preg_match($angka, $text, $matchAngka) ? "Angka ditemukan: <span class='highlight'>" . $matchAngka[0] . "</span>" : "Tidak ada angka.";
+        $patternAngka = '/[0-9]+/'; 
+        $hasilAngka = preg_match($patternAngka, $text, $matchesAngka) ? "Cocokkan angka: " . $matchesAngka[0] : "Tidak ada angka!";
 
         $patternGanti = '/apple/';
         $replacement = 'banana';
         $textDiganti = preg_replace($patternGanti, $replacement, $text);
 
+        $hasilGod = preg_match($patternGod, $text, $matchesGod) ? "Cocokkan pola 'good': " . $matchesGod[0] : "Tidak ada yang cocok dengan pola 'good'.";
+
         echo "<div class='hasil'>";
         echo "<strong>Hasil Analisis:</strong><br><br>";
         echo "$hasilHurufKecil<br>";
-        echo "$hasilAngka<br><br>";
+        echo "$hasilAngka<br>";
+        echo "$hasilGod<br><br>";
         echo "<strong>Teks setelah penggantian kata:</strong><br>";
         echo "<span class='highlight'>$textDiganti</span>";
         echo "</div>";

@@ -23,7 +23,7 @@
         $text = isset($_POST['text']) ? $_POST['text'] : '';
         $text = htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
 
-        $patternHurufKecil = '/[a-z]/';
+        $patternHurufKecil = '/[a-z]/'; 
         $hasilHurufKecil = preg_match($patternHurufKecil, $text) ? "Huruf kecil ditemukan!" : "✘ Tidak ada huruf kecil!";
 
         $patternAngka = '/[0-9]+/'; 
@@ -36,11 +36,15 @@
         $patternGod = "/go*d/"; 
         $hasilGod = preg_match($patternGod, $text, $matchesGod) ? "Cocokkan: " . $matchesGod[0] : "Tidak ada yang cocok!";
 
+        $patternColor = "/colou?r/";
+        $hasilColor = preg_match($patternColor, $text, $matchesColor) ? "Cocokkan: " . $matchesColor[0] : "Tidak ada yang cocok dengan pola 'colou?r'!";
+
         echo "<div class='hasil'>";
         echo "<strong>Hasil Analisis:</strong><br><br>";
         echo "$hasilHurufKecil<br>";
         echo "$hasilAngka<br>";
-        echo "$hasilGod<br><br>";
+        echo "$hasilGod<br>";
+        echo "$hasilColor<br><br>";
         echo "<strong>Teks setelah penggantian kata:</strong><br>";
         echo "<span class='highlight'>$textDiganti</span>";
         echo "</div>";

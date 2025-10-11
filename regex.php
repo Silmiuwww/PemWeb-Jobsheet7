@@ -23,17 +23,18 @@
         $text = isset($_POST['text']) ? $_POST['text'] : '';
         $text = htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
 
-        $patternHurufKecil = '/[a-z]/'; 
-        $hasilHurufKecil = preg_match($patternHurufKecil, $text) ? "Huruf kecil ditemukan!" : "Tidak ada huruf kecil!";
+        $patternHurufKecil = '/[a-z]/';
+        $hasilHurufKecil = preg_match($patternHurufKecil, $text) ? "Huruf kecil ditemukan!" : "✘ Tidak ada huruf kecil!";
 
         $patternAngka = '/[0-9]+/'; 
-        $hasilAngka = preg_match($patternAngka, $text, $matchesAngka) ? "Cocokkan angka: " . $matchesAngka[0] : "Tidak ada angka!";
+        $hasilAngka = preg_match($patternAngka, $text, $matchesAngka) ? "Cocokkan: " . $matchesAngka[0] : "Tidak ada yang cocok!";
 
         $patternGanti = '/apple/';
         $replacement = 'banana';
         $textDiganti = preg_replace($patternGanti, $replacement, $text);
 
-        $hasilGod = preg_match($patternGod, $text, $matchesGod) ? "Cocokkan pola 'good': " . $matchesGod[0] : "Tidak ada yang cocok dengan pola 'good'.";
+        $patternGod = "/go*d/"; 
+        $hasilGod = preg_match($patternGod, $text, $matchesGod) ? "Cocokkan: " . $matchesGod[0] : "Tidak ada yang cocok!";
 
         echo "<div class='hasil'>";
         echo "<strong>Hasil Analisis:</strong><br><br>";

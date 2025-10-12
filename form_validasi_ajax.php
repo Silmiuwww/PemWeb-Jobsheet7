@@ -15,6 +15,10 @@
         <input type="text" id="email" name="email"><br>
         <span id="email-error" style="color: red"></span><br><br>
 
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password"><br>
+        <span id="password-error" style="color: red"></span><br><br>
+
         <input type="submit" value="Submit">
     </form>
 
@@ -23,14 +27,16 @@
     <script>
         $(document).ready(function() {
             $("#form").submit(function(event) {
-                event.preventDefault(); 
+                event.preventDefault();
 
                 var nama = $("#nama").val().trim();
                 var email = $("#email").val().trim();
+                var password = $("#password").val().trim();
                 var valid = true;
 
                 $("#nama-error").text("");
                 $("#email-error").text("");
+                $("#password-error").text("");
 
                 if (nama === "") {
                     $("#nama-error").text("Nama harus diisi.");
@@ -42,11 +48,16 @@
                     valid = false;
                 }
 
+                if (password.length < 8) {
+                    $("#password-error").text("Password minimal 8 karakter.");
+                    valid = false;
+                }
+
                 if (valid) {
                     $.ajax({
                         type: "POST",
                         url: "proses_validasi.php",
-                        data: { nama: nama, email: email },
+                        data: { nama: nama, email: email, password: password },
                         success: function(response) {
                             $("#hasil").html(response);
                         },
